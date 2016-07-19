@@ -1,6 +1,7 @@
 package gr.ntua.ece.elasticapp.elasticapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,32 +54,17 @@ public class ResultsActivity extends AppCompatActivity {
         listView.setAdapter(dataAdapter);
         listView.setTextFilterEnabled(true);
         listView.setEmptyView(findViewById(R.id.emptyElement));
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                SearchDisplayResult selectedItem = (SearchDisplayResult) parent.getItemAtPosition(position);
-//                if (selectedItem.getIsCategoryOrRegion()) {
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("Action")
-//                            .setAction("What Search Selected Category")
-//                            .build());
-//                    searchOptions.setCategoryID(selectedItem.getId());
-//                    searchOptions.setCategoryString(selectedItem.getName());
-//                    Intent intent = new Intent();
-//                    intent.putExtra("searchOptions", searchOptions);
-//                    setResult(RESULT_OK, intent);
-//                    finish();
-//                } else {
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("Action")
-//                            .setAction("What Search Selected Place")
-//                            .build());
-//                    goToDetails(selectedItem);
-//
-//                }
-//
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Place selectedItem = (Place) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(ResultsActivity.this, DetailsActivity.class);
+                intent.putExtra("id", id);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
         dataAdapter.clear();
         try {
             search(searchText);

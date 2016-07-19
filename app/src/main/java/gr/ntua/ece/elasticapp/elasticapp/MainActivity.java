@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,32 +53,17 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(dataAdapter);
         listView.setTextFilterEnabled(true);
         listView.setEmptyView(findViewById(R.id.emptyElement));
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                SearchDisplayResult selectedItem = (SearchDisplayResult) parent.getItemAtPosition(position);
-//                if (selectedItem.getIsCategoryOrRegion()) {
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("Action")
-//                            .setAction("What Search Selected Category")
-//                            .build());
-//                    searchOptions.setCategoryID(selectedItem.getId());
-//                    searchOptions.setCategoryString(selectedItem.getName());
-//                    Intent intent = new Intent();
-//                    intent.putExtra("searchOptions", searchOptions);
-//                    setResult(RESULT_OK, intent);
-//                    finish();
-//                } else {
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("Action")
-//                            .setAction("What Search Selected Place")
-//                            .build());
-//                    goToDetails(selectedItem);
-//
-//                }
-//
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Place selectedItem = (Place) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                intent.putExtra("id", id);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
         EditText editText = (EditText) findViewById(R.id.myFilter);
         editText.addTextChangedListener(new TextWatcher() {
 
