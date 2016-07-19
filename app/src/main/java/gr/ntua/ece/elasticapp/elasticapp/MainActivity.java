@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearchByName(v.getText().toString());  // to diko sas go
+                    performSearchByName(v.getText().toString());
                     return true;
                 }
                 return false;
