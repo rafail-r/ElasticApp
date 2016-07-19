@@ -1,8 +1,5 @@
 package gr.ntua.ece.elasticapp.elasticapp;
 
-/**
- * Created by rafail on 19/7/2016.
- */
 public class LiveResult {
     private String name;
     private String id;

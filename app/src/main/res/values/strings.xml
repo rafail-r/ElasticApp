@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ElasticApp</string>
+    <string name="search_box_placeholder">Type a place…</string>
+    <string name="no_results">No results.</string>
 </resources>

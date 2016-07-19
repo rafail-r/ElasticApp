@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gr.ntua.ece.elasticapp.elasticapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".AppController"
         android:allowBackup="true"
@@ -19,5 +20,4 @@
         <activity android:name=".ResultsActivity">
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
