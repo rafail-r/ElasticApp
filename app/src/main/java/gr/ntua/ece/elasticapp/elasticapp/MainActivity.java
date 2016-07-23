@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("text", text);
         startActivity(intent);
     }
-
+    //TODO na ftiaksoume alli search me near me
     private void search(String searchText) throws JSONException {
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, "http://83.212.96.164/searchapp/rest/name/?search=" + searchText, null,
                 new Response.Listener<JSONObject>() {

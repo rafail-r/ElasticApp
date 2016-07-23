@@ -46,6 +46,5 @@
             android:stepSize="0.1"
             android:isIndicator="true" />
     </LinearLayout>
-
-
 </RelativeLayout>
+<!-- TODO 23/7 : ta xromata na min einai tsirko-->
