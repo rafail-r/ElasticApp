@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Place selectedItem = (Place) parent.getItemAtPosition(position);
+//                Place selectedItem = (Place) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 intent.putExtra("id", id);

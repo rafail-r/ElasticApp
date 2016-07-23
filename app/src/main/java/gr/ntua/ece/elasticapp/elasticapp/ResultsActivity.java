@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -86,8 +87,10 @@ public class ResultsActivity extends AppCompatActivity {
 
 
         private class ViewHolder {
-            TextView code;
-
+            TextView name;
+            TextView address;
+            TextView type;
+            RatingBar ratingBar;
         }
 
         @Override
@@ -106,9 +109,13 @@ public class ResultsActivity extends AppCompatActivity {
                 LayoutInflater vi = (LayoutInflater) getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
 
-                convertView = vi.inflate(R.layout.live_result_item, parent, false);
+                convertView = vi.inflate(R.layout.result_item, parent, false);
                 holder = new ViewHolder();
-                holder.code = (TextView) convertView.findViewById(R.id.textView);
+
+                holder.name = (TextView) convertView.findViewById(R.id.TextName);
+                holder.address = (TextView) convertView.findViewById(R.id.TextAddress);
+                holder.type = (TextView) convertView.findViewById(R.id.TextType);
+                holder.ratingBar = (RatingBar) convertView.findViewById(R.id.RatingBar);
                 convertView.setTag(holder);
 
 
@@ -116,8 +123,10 @@ public class ResultsActivity extends AppCompatActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
             Place result = results.get(position);
-            holder.code.setText(result.getName());
-
+            holder.name.setText(result.getName());
+            holder.address.setText(result.getAddress());
+            holder.type.setText(result.getType());
+            holder.ratingBar.setRating(result.getRating());
             return convertView;
 
         }
@@ -136,6 +145,9 @@ public class ResultsActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonResults.length(); i++) {
                                 Place res = new Place();
                                 res.setName(jsonResults.getJSONObject(i).getString("name"));
+                                res.setAddress(jsonResults.getJSONObject(i).getString("formatted_address"));
+                                res.setType(jsonResults.getJSONObject(i).getString("types"));
+                                res.setRating(jsonResults.getJSONObject(i).getString("rating"));
                                 dataAdapter.results.add(res);
                             }
                             dataAdapter.notifyDataSetChanged();
