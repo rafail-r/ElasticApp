@@ -2,19 +2,14 @@ package gr.ntua.ece.elasticapp.elasticapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -58,7 +53,7 @@ public class ResultsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Place selectedItem = (Place) parent.getItemAtPosition(position);
+                //Place selectedItem = (Place) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(ResultsActivity.this, DetailsActivity.class);
                 intent.putExtra("id", id);
