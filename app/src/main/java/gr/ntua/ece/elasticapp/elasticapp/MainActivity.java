@@ -56,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-//                Place selectedItem = (Place) parent.getItemAtPosition(position);
+                LiveResult selectedItem = (LiveResult) parent.getItemAtPosition(position);
+
 
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                intent.putExtra("id", id);
-                setResult(RESULT_OK, intent);
-                finish();
+                intent.putExtra("id", selectedItem.getId());
+                startActivity(intent);
             }
         });
         EditText editText = (EditText) findViewById(R.id.myFilter);
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonResults.length(); i++) {
                                 LiveResult res = new LiveResult();
                                 res.setName(jsonResults.getJSONObject(i).getString("name"));
+                                res.setId(jsonResults.getJSONObject(i).getString("id"));
                                 dataAdapter.results.add(res);
                             }
                             dataAdapter.notifyDataSetChanged();

@@ -53,12 +53,11 @@ public class ResultsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //Place selectedItem = (Place) parent.getItemAtPosition(position);
+                Place selectedItem = (Place) parent.getItemAtPosition(position);
 
                 Intent intent = new Intent(ResultsActivity.this, DetailsActivity.class);
-                intent.putExtra("id", id);
-                setResult(RESULT_OK, intent);
-                finish();
+                intent.putExtra("id", selectedItem.getId());
+                startActivity(intent);
             }
         });
         dataAdapter.clear();
@@ -140,6 +139,7 @@ public class ResultsActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonResults.length(); i++) {
                                 Place res = new Place();
                                 res.setName(jsonResults.getJSONObject(i).getString("name"));
+                                res.setId(jsonResults.getJSONObject(i).getString("id"));
                                 res.setAddress(jsonResults.getJSONObject(i).getString("formatted_address"));
                                 res.setType(jsonResults.getJSONObject(i).getString("types"));
                                 res.setRating(jsonResults.getJSONObject(i).getString("rating"));

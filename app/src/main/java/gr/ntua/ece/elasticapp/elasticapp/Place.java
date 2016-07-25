@@ -6,6 +6,7 @@ public class Place {
     private String type;
     private Float rating;
     private String address;
+    private String phoneNumber;
 
     public String getId() {
         return id;
@@ -45,5 +46,13 @@ public class Place {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
