@@ -3,6 +3,7 @@
     package="gr.ntua.ece.elasticapp.elasticapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".AppController"
@@ -20,6 +21,10 @@
         </activity>
         <activity android:name=".ResultsActivity"></activity>
         <activity android:name=".DetailsActivity"></activity>
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCIyZTJrSlCX9zqgdj1BgUANyEI1PgeHkw"/>
+
     </application>
 
 </manifest>
