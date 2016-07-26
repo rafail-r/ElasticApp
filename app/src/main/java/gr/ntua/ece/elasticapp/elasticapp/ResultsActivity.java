@@ -25,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -43,10 +41,7 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void displayListView(String searchText) {
-        ArrayList<Place> results_List = new ArrayList<>();
-
-        dataAdapter = new MyCustomAdapter(this, R.layout.result_item, results_List);
-
+        dataAdapter = new MyCustomAdapter(this, R.layout.result_item);
         listView.setAdapter(dataAdapter);
         listView.setTextFilterEnabled(true);
         listView.setEmptyView(findViewById(R.id.emptyElement));
@@ -70,29 +65,15 @@ public class ResultsActivity extends AppCompatActivity {
 
     private class MyCustomAdapter extends ArrayAdapter<Place> {
 
-        private ArrayList<Place> results;
-
-
-        public MyCustomAdapter(Context context, int textViewResourceId, ArrayList<Place> results_List) {
-            super(context, textViewResourceId, results_List);
-            this.results = new ArrayList<>();
-            this.results.addAll(results_List);
+        public MyCustomAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
         }
-
 
         private class ViewHolder {
             TextView name;
             TextView address;
             TextView type;
             RatingBar ratingBar;
-        }
-
-        @Override
-        public int getCount() {
-
-            return super.getCount();
-
-
         }
 
         @Override
@@ -116,16 +97,13 @@ public class ResultsActivity extends AppCompatActivity {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            Place result = results.get(position);
+            Place result = this.getItem(position);
             holder.name.setText(result.getName());
             holder.address.setText(result.getAddress());
             holder.type.setText(result.getType());
             holder.ratingBar.setRating(result.getRating());
             return convertView;
-
         }
-
-
     }
 
     private void search(String searchText) throws JSONException {
@@ -135,7 +113,7 @@ public class ResultsActivity extends AppCompatActivity {
                     public void onResponse(JSONObject jsonResponse) {
                         try {
                             JSONArray jsonResults = jsonResponse.getJSONArray("res");
-                            dataAdapter.results.clear();
+                            dataAdapter.clear();
                             for (int i = 0; i < jsonResults.length(); i++) {
                                 Place res = new Place();
                                 res.setName(jsonResults.getJSONObject(i).getString("name"));
@@ -143,13 +121,9 @@ public class ResultsActivity extends AppCompatActivity {
                                 res.setAddress(jsonResults.getJSONObject(i).getString("formatted_address"));
                                 res.setType(jsonResults.getJSONObject(i).getString("types"));
                                 res.setRating(jsonResults.getJSONObject(i).getString("rating"));
-                                dataAdapter.results.add(res);
+                                dataAdapter.add(res);
                             }
                             dataAdapter.notifyDataSetChanged();
-                            dataAdapter.clear();
-                            for (int i = 0, l = dataAdapter.results.size(); i < l; i++)
-                                dataAdapter.add(dataAdapter.results.get(i));
-                            dataAdapter.notifyDataSetInvalidated();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

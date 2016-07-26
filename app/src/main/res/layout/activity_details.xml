@@ -8,5 +8,56 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="gr.ntua.ece.elasticapp.elasticapp.DetailsActivity">
+    <!-- todo fix layout -->
+    <LinearLayout android:id="@+id/Details"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
+        <TextView
+            android:id="@+id/DetailsName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/DetailsAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/DetailsType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000000"
+            />
+        <TextView
+            android:id="@+id/DetailsPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000000"
+            />
+        <RatingBar
+            android:id="@+id/DetailsRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:layout_marginTop="15dp"
+            android:stepSize="0.1"
+            android:isIndicator="true" />
+    </LinearLayout>
 </RelativeLayout>

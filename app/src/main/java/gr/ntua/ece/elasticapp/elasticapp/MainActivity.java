@@ -28,8 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
@@ -45,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayListView() {
-        ArrayList<LiveResult> live_results_List = new ArrayList<>();
 
-        dataAdapter = new MyCustomAdapter(this,
-                R.layout.live_result_item, live_results_List);
+        dataAdapter = new MyCustomAdapter(this, R.layout.live_result_item);
 
         listView.setAdapter(dataAdapter);
         listView.setTextFilterEnabled(true);
@@ -102,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("text", text);
         startActivity(intent);
     }
+
     //TODO na ftiaksoume alli search me near me
     private void search(String searchText) throws JSONException {
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, "http://83.212.96.164/searchapp/rest/name/?search=" + searchText, null,
@@ -110,18 +107,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject jsonResponse) {
                         try {
                             JSONArray jsonResults = jsonResponse.getJSONArray("res");
-                            dataAdapter.results.clear();
+                            dataAdapter.clear();
                             for (int i = 0; i < jsonResults.length(); i++) {
                                 LiveResult res = new LiveResult();
                                 res.setName(jsonResults.getJSONObject(i).getString("name"));
                                 res.setId(jsonResults.getJSONObject(i).getString("id"));
-                                dataAdapter.results.add(res);
+                                dataAdapter.add(res);
                             }
                             dataAdapter.notifyDataSetChanged();
-                            dataAdapter.clear();
-                            for (int i = 0, l = dataAdapter.results.size(); i < l; i++)
-                                dataAdapter.add(dataAdapter.results.get(i));
-                            dataAdapter.notifyDataSetInvalidated();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -143,27 +136,12 @@ public class MainActivity extends AppCompatActivity {
 
     private class MyCustomAdapter extends ArrayAdapter<LiveResult> {
 
-        private ArrayList<LiveResult> results;
-
-
-        public MyCustomAdapter(Context context, int textViewResourceId, ArrayList<LiveResult> live_result_List) {
-            super(context, textViewResourceId, live_result_List);
-            this.results = new ArrayList<>();
-            this.results.addAll(live_result_List);
+        public MyCustomAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
         }
-
 
         private class ViewHolder {
             TextView code;
-
-        }
-
-        @Override
-        public int getCount() {
-
-            return super.getCount();
-
-
         }
 
         @Override
@@ -178,18 +156,13 @@ public class MainActivity extends AppCompatActivity {
                 holder = new ViewHolder();
                 holder.code = (TextView) convertView.findViewById(R.id.textView);
                 convertView.setTag(holder);
-
-
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            LiveResult result = results.get(position);
+            LiveResult result = this.getItem(position);
             holder.code.setText(result.getName());
 
             return convertView;
-
         }
-
-
     }
 }
