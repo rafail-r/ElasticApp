@@ -1,5 +1,8 @@
 package gr.ntua.ece.elasticapp.elasticapp;
 
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
@@ -32,10 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
     MyCustomAdapter dataAdapter;
+    LocListener locListener;
+    LocationManager locationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locListener = new LocListener();
+        locationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 5000, 10, locListener);
+        } catch (SecurityException e){
+            e.printStackTrace();
+        }
+
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listView);
@@ -96,6 +113,11 @@ public class MainActivity extends AppCompatActivity {
     private void performSearchByName(String text) {
         Intent intent = new Intent(this, ResultsActivity.class);
         intent.putExtra("text", text);
+
+        if (((Switch) findViewById(R.id.NearMe)).isChecked()) {
+            intent.putExtra("lat", locListener.getLat());
+            intent.putExtra("lon", locListener.getLon());
+        }
         startActivity(intent);
     }
 

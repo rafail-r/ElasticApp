@@ -35,9 +35,10 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-        Log.d("searchText",(String)getIntent().getSerializableExtra("text"));
+        Log.d("searchText", (String) getIntent().getSerializableExtra("text"));
         listView = (ListView) findViewById(R.id.listView);
-        displayListView((String)getIntent().getSerializableExtra("text"));
+        displayListView((String) getIntent().getSerializableExtra("text"));
+
     }
 
     private void displayListView(String searchText) {
@@ -107,7 +108,14 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void search(String searchText) throws JSONException {
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, "http://83.212.96.164/searchapp/rest/name/?search=" + searchText, null,
+        String url = "http://83.212.96.164/searchapp/rest/name/?search=" + searchText;
+        Double lat = (Double) getIntent().getSerializableExtra("lat");
+        Double lon = (Double) getIntent().getSerializableExtra("lon");
+        if ((lat != null) && (lon != null)) {
+            url = "http://83.212.96.164/searchapp/rest/near/?search=" + searchText + "&lat=" + lat + "&lon=" + lon;
+            Log.d("lat", lat.toString());
+        }
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonResponse) {

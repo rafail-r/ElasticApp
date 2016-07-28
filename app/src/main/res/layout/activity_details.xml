@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,63 +7,61 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="gr.ntua.ece.elasticapp.elasticapp.DetailsActivity">
-    <!-- todo fix layout -->
-    <LinearLayout android:id="@+id/Details"
-        android:orientation="vertical"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:layout_width="350dp"
-        android:layout_height="300dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-
+    tools:context="gr.ntua.ece.elasticapp.elasticapp.DetailsActivity"
+    android:weightSum="2"
+    android:orientation="vertical"
+    >
         <TextView
             android:id="@+id/DetailsName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:textSize="16sp"
-            android:layout_marginTop="15dp"
             android:textColor="#000000"
+            android:layout_weight="0.1"
             />
         <TextView
             android:id="@+id/DetailsAddress"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:textSize="16sp"
-            android:layout_marginTop="15dp"
             android:textColor="#000000"
+            android:layout_weight="0.1"
             />
         <TextView
             android:id="@+id/DetailsWebsite"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:textSize="16sp"
-            android:layout_marginTop="15dp"
             android:textColor="#000000"
             android:autoLink="web"
+            android:layout_weight="0.2"
             />
         <TextView
             android:id="@+id/DetailsPhone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:textSize="16sp"
-            android:layout_marginTop="15dp"
             android:textColor="#000000"
+            android:layout_weight="0.1"
             />
-        <RatingBar
-            android:id="@+id/DetailsRatingBar"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="?android:attr/ratingBarStyleSmall"
-            android:numStars="5"
-            android:layout_marginTop="15dp"
-            android:stepSize="0.1"
-            android:isIndicator="true" />
+            android:layout_weight="0.1">
+            <RatingBar
+                android:id="@+id/DetailsRatingBar"
+                android:layout_width="wrap_content"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/DetailsMap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.google.android.gms.maps.MapFragment"/>
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_height="0dp"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_weight="1.2"
+            />
+</LinearLayout>
