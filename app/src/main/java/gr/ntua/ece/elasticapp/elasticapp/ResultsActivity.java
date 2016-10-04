@@ -114,6 +114,7 @@ public class ResultsActivity extends AppCompatActivity {
         if ((lat != null) && (lon != null)) {
             url = "http://83.212.96.164/searchapp/rest/near/?search=" + searchText + "&lat=" + lat + "&lon=" + lon;
             Log.d("lat", lat.toString());
+            Log.d("lon", lon.toString());
         }
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
