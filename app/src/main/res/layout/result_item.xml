@@ -13,7 +13,7 @@
             android:id="@+id/TextName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#000000"
             android:textSize="18sp"
             />
         <TextView
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="#FF267F00"
+            android:textColor="#A0A0A0"
             />
     </LinearLayout>
     <LinearLayout android:id="@+id/TextRight"
@@ -34,7 +34,7 @@
             android:id="@+id/TextType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#A0A0A0"
             android:textSize="18sp"
             />
         <RatingBar
@@ -47,4 +47,3 @@
             android:isIndicator="true" />
     </LinearLayout>
 </RelativeLayout>
-<!-- TODO 23/7 : ta xromata na min einai tsirko-->
