@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 dataAdapter.clear();
                 try {
-                    String url = "http://83.212.96.164/searchapp/rest/name/?search=" + s.toString();
+                    String url = "http://83.212.96.164/searchapp/rest/autocomplete/?search=" + s.toString();
                     mainCommunicator.search(url);
                 } catch (JSONException e) {
                     e.printStackTrace();
