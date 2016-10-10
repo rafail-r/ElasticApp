@@ -64,6 +64,8 @@ public class DetailsActivity extends AppCompatActivity implements OnMapReadyCall
                 ((TextView) findViewById(R.id.DetailsPhone)).setText(jsonResults.getString("formatted_phone_number"));
                 String rating = jsonResults.getString("rating");
                 ((TextView) findViewById(R.id.DetailsRating)).setText("  " + rating + "  ");
+                if (rating.equals("-")) ((RatingBar) findViewById(R.id.DetailsRatingBar)).setRating(0);
+                else ((RatingBar) findViewById(R.id.DetailsRatingBar)).setRating(Float.parseFloat(rating));
                 ((RatingBar) findViewById(R.id.DetailsRatingBar)).setRating(Float.parseFloat(rating));
                 String type = jsonResults.getJSONArray("types").getString(0);
                 ((TextView) findViewById(R.id.DetailsType)).setText(jsonResults.getJSONArray("types").getString(0));

@@ -68,8 +68,12 @@ public class ResultsActivity extends AppCompatActivity {
                     res.setName(jsonResults.getJSONObject(i).getString("name"));
                     res.setId(jsonResults.getJSONObject(i).getString("id"));
                     res.setAddress(jsonResults.getJSONObject(i).getString("formatted_address"));
-                    res.setType(jsonResults.getJSONObject(i).getJSONArray("types").getString(0));
-                    res.setRating(jsonResults.getJSONObject(i).getString("rating"));
+                    String type = jsonResults.getJSONObject(i).getJSONArray("types").getString(0);
+                    res.setType(type.substring(0, Math.min(type.length(), 10)));
+
+                    String rating = jsonResults.getJSONObject(i).getString("rating");
+                    if (rating.equals("-")) res.setRating("0.0");
+                    else res.setRating(rating);
                     dataAdapter.add(res);
                 }
                 dataAdapter.notifyDataSetChanged();

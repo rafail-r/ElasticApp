@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:weightSum="2"
     android:padding="8dp">
     <LinearLayout android:id="@+id/TextLeft"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dip">
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dip"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/TextName"
             android:layout_width="wrap_content"
@@ -26,15 +30,19 @@
     </LinearLayout>
     <LinearLayout android:id="@+id/TextRight"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
         android:layout_alignParentRight="true"
-        android:paddingLeft="10dip">
+        android:paddingRight="10dip"
+        android:weightSum="2"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/TextType"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#A0A0A0"
+            android:gravity="right|top"
+            android:layout_weight="1"
             android:textSize="18sp"
             />
         <RatingBar
@@ -44,6 +52,8 @@
             style="?android:attr/ratingBarStyleSmall"
             android:numStars="5"
             android:stepSize="0.1"
+            android:layout_gravity="right|bottom"
+            android:layout_weight="1"
             android:isIndicator="true" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
