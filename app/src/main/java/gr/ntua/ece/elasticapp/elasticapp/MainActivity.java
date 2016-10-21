@@ -168,7 +168,15 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 dataAdapter.clear();
                 try {
-                    String url = "http://83.212.96.164/searchapp/rest/autocomplete/?search=" + s.toString();
+                    String input= "";
+                    String url = "http://83.212.96.164/searchapp/rest/autocomplete/?search=";
+                    try {
+                        input = java.net.URLEncoder.encode(s.toString(), "utf-8");
+                    }
+                    catch (java.io.UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    url = url + input;
                     mainCommunicator.search(url);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -180,7 +188,14 @@ public class MainActivity extends AppCompatActivity implements ConnectionCallbac
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    goToResultsActivity(v.getText().toString());
+                    String input = "";
+                    try {
+                        input = java.net.URLEncoder.encode(v.getText().toString(), "utf-8");
+                    }
+                    catch (java.io.UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    goToResultsActivity(input);
                     return true;
                 }
                 return false;

@@ -45,6 +45,7 @@ public class ResultsActivity extends AppCompatActivity {
         });
         dataAdapter.clear();
         try {
+
             String url = "http://83.212.96.164/searchapp/rest/name/?search=" + searchText;
             Double lat = (Double) getIntent().getSerializableExtra("lat");
             Double lon = (Double) getIntent().getSerializableExtra("lon");
